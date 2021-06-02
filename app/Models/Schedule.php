@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Schedule extends Model
 {
+    // Trait 1
     use HasFactory;
 
     protected $casts = [
