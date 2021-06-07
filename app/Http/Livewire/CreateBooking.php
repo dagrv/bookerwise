@@ -23,6 +23,11 @@ class CreateBooking extends Component
     {
         $this->state['employee'] = '';
 
+        if (!$serviceId) {
+            $this->employees = collect();
+            return;
+        }
+
         $this->employees = $this->selectedService->employees;
     }
 
