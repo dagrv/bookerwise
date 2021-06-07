@@ -15,10 +15,16 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+
+        <!-- Livewire Styles -->
+        <livewire:styles />
     </head>
     <body>
         <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>
+
+        <!-- Livewire Scripts -->
+        <livewire:scripts />
     </body>
 </html>
