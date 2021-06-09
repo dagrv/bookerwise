@@ -1,7 +1,7 @@
 <div class="bg-white rounded-md">
     <div class="flex items-center justify-center relative">
         @if($this->weekIsGreaterThanCurrent)
-            <button type="button" class="p-3 absolute left-0 top-0 outline-none" wire:click="decrementCalendarWeek">
+            <button type="button" class="focus:ring-0 p-3 absolute left-0 top-0 outline-none" wire:click="decrementCalendarWeek">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
             </button>
         @endif
@@ -10,19 +10,19 @@
             {{ $this->calendarStartDate->format('F (m)  Y') }}
         </div>
 
-        <button type="button" class="p-3 absolute right-0 top-0" wire:click="incrementCalendarWeek">
+        <button type="button" class="focus:ring-0 p-3 absolute right-0 top-0" wire:click="incrementCalendarWeek">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
         </button>
     </div>
 
     <div class="flex justify-between items-center px-3 pb-3 border-b border-gray-300">
-        @foreach($this->CalWeekInterval as $day)
-            <button type="button text-center group cursor-pointer outline-none">
+        @foreach($this->calendarWeekInterval as $day)
+            <button type="button" class="text-center group cursor-pointer outline-none focus:outline-none" wire:click="setDate({{ $day->timestamp }})">
                 <div class="text-md leading-none mb-2">
                     {{ $day->format('D') }}
                 </div>
 
-                <div class="text-md leading-none p-1 rounded-full w-9 h-9 text-white bg-black flex items-center justify-center">
+                <div class="text-md leading-none p-1 rounded-full w-9 h-9 text-white bg-black flex items-center justify-center {{ $date === $day->timestamp ? 'bg-green-600' : '' }}">
                     {{ $day->format('d') }}
                 </div>
             </button>
@@ -31,7 +31,7 @@
 
     <div class="max-h-52 overflow-y-scroll">
         <input type="radio" name="time" id="" value="" class="sr-only">
-        <label for="" class="w-full text-md text-left focus:outline-none px-4 py-2 flex cursor-pointer items-center">
+        <label for="" class="w-full text-md text-left outline-none px-4 py-2 flex cursor-pointer items-center border-b border-gray-200">
             <svg class="w-5 h-5 text-green-500 mr-1 " fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
             1PM
         </label>

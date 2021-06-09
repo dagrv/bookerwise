@@ -2,19 +2,45 @@
 
 namespace App\Http\Livewire;
 
+use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use Livewire\Component;
 
 class BookingCalendar extends Component
 {
+    public $date;
     public $calendarStartDate;
+    public $employee;
+    public $service;
 
     public function mount()
     {
         $this->calendarStartDate = now();
+        // $this->setDate(now()->timestamp);
     }
 
-    public function getCalWeekIntervalProperty()
+    public function getEmployeeScheduleProperty()
+    {
+        return $this->employee->schedules()
+            ->whereDate('date', $this->calendarSelectedDateObject)
+            ->first();
+    }
+
+    public function getCalendarSelectedDateObjectProperty()
+    {
+        return Carbon::createFromTimestamp($this->date);
+    }
+
+    public function setDate($timestamp)
+    {
+        $this->date = $timestamp;
+
+        dd($this->employeeSchedule);
+
+        // 19
+    }
+
+    public function getCalendarWeekIntervalProperty()
     {
         return CarbonInterval::days(1)->toPeriod(
             $this->calendarStartDate,
